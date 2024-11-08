@@ -45,6 +45,12 @@
         width: 100%;
         margin-bottom: 10px;
     }
+    .input-section select {
+        padding: 10px;
+        font-size: 16px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
     .input-section button {
         padding: 10px 20px;
         font-size: 16px;
@@ -79,7 +85,7 @@
         -moz-osx-font-smoothing: grayscale; /* Firefox浏览器的字体平滑处理 */
     }
     .highlight {
-        color: blue; /* 高亮显示的颜色 */
+        color: red; /* 默认高亮显示的颜色 */
     }
     .error-message {
         color: red;
@@ -105,6 +111,12 @@
         <textarea id="poemInput" rows="4" cols="50"></textarea>
         <label for="nameInput">请输入名字：</label>
         <input type="text" id="nameInput" />
+        <label for="colorSelect">选择姓名颜色：</label>
+        <select id="colorSelect">
+            <option value="red">红色</option>
+            <option value="green">绿色</option>
+            <option value="blue">蓝色</option>
+        </select>
         <button onclick="displayPoem()">显示古诗</button>
     </div>
     <div class="divider"></div>
@@ -142,6 +154,7 @@
     function displayPoem() {
         const poemInput = document.getElementById('poemInput').value;
         const nameInput = document.getElementById('nameInput').value;
+        const selectedColor = document.getElementById('colorSelect').value;
 
         const titleContainer = document.getElementById('poemTitle');
         const container = document.getElementById('poemContainer');
@@ -185,6 +198,7 @@
                         // 只有在诗句的开头位置，并且与名字中的某个字相匹配时，才添加高亮类
                         if (isFirstChar && lineIndex < nameLength && char === nameChars[lineIndex]) {
                             span.classList.add('highlight');
+                            span.style.color = selectedColor;
                         }
 
                         container.appendChild(span);
